@@ -5,6 +5,8 @@ const fs = require('fs');
 const http = require('http');
 const url = require('url');
 
+const slugify = require('slugify');
+
 const replaceTemplate = require('./modules/replaceTemplate');
 
 // Create a same way we create a server ch. 12 Routing
@@ -24,8 +26,11 @@ const tempProduct = fs.readFileSync(
 const data = fs.readFileSync(`${__dirname}/dev-data/data.json`, 'utf-8');
 const dataObj = JSON.parse(data);
 
+//Slugify
+const slugs = dataObj.map((el) => slugify(el.productName, { lower: true }));
+console.log(slugs);
+
 const server = http.createServer((req, res) => {
-  // console.log(req.url);
   const { query, pathname } = url.parse(req.url, true);
 
   if (pathname === '/overview' || pathname === '/') {
@@ -36,13 +41,12 @@ const server = http.createServer((req, res) => {
         return replaceTemplate(tempCard, el);
       })
       .join('');
-    // console.log(cardsHtml);
+
     const output = tempOverview.replace('{%PRODUCT_CARDS%}', cardsHtml);
     res.end(output);
   }
   // product
   else if (pathname === '/product') {
-    // console.log(query);
     res.writeHead(200, { 'Content-type': 'text/html' });
     const product = dataObj[query.id];
     const output = replaceTemplate(tempProduct, product);

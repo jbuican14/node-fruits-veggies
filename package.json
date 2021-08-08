@@ -1,0 +1,25 @@
+{
+  "name": "node-js-farm-demo",
+  "version": "1.0.0",
+  "description": "Learning node.js",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jbuican14/node-fruits-veggies.git"
+  },
+  "author": "Juti B",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jbuican14/node-fruits-veggies/issues"
+  },
+  "homepage": "https://github.com/jbuican14/node-fruits-veggies#readme",
+  "dependencies": {
+    "slugify": "^1.6.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.12"
+  }
+}
